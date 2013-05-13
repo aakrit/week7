@@ -1,0 +1,27 @@
+<h1 style="color: <%= @color %>">Howdy <%= @name %></h1>
+
+<%= form_tag '/mynameis' do %>
+  <div>
+    <%= label_tag :person %>
+    <%= text_field_tag :person %>
+  </div>
+
+  <div>
+    <%= label_tag :color %>
+    <%= text_field_tag :color %>
+  </div>
+
+  <%= submit_tag "Introduce Yourself" %>
+<% end %>
+
+<%= link_to "See ya later", "/bye", method: 'delete' %>
+
+
+
+
+
+
+
+
+
+
