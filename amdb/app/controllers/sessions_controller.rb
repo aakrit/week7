@@ -14,5 +14,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    reset_session
+    redirect_to movies_url, notice: 'Signed out successfully.'
   end
 end
+
+
+
+
+
+
+
+

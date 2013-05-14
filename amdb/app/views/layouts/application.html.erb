@@ -14,14 +14,16 @@
     <%= link_to "Actors", actors_url %> |
     <%= link_to "Users", users_url %>
   </nav>
-  <% if session[:user_id].present? %>
+
+  <% if signed_in? %>
     <p>
-      Welcome back, <%= User.find_by_id(session[:user_id]).email %>.
+      Welcome back, <%= current_user.email %>.
       <%= link_to "Sign Out", session_url, method: 'delete' %>
     </p>
   <% else %>
     <p><%= link_to "Sign In", new_session_url %> or <%= link_to "Sign Up", new_user_url %></p>
   <% end %>
+
   <p><%= notice %></p>
 
   <%= yield %>
