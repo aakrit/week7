@@ -1,4 +1,8 @@
 Amdb::Application.routes.draw do
+  get '/sessions/new' => 'Sessions#new', as: 'new_session'
+  post '/sessions' => 'Sessions#create', as: 'sessions'
+  delete '/sessions' => 'Sessions#destroy', as: 'session'
+
   resources :users
 
 
