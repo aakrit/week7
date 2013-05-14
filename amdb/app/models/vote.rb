@@ -6,4 +6,5 @@ class Vote < ActiveRecord::Base
 
   validates :user, presence: true
   validates :movie, presence: true
+  validates :user_id, uniqueness: { scope: :movie_id }
 end

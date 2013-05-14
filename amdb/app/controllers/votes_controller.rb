@@ -1,4 +1,15 @@
 class VotesController < ApplicationController
+
+  before_filter :authorize_user, only: [:edit, :update, :destroy]
+
+  def authorize_user
+    vote = Vote.find(params[:id])
+
+    if vote.user != current_user
+      redirect_to votes_url, notice: "Nice try, Jeff."
+    end
+  end
+
   # GET /votes
   # GET /votes.json
   def index
@@ -41,6 +52,7 @@ class VotesController < ApplicationController
   # POST /votes.json
   def create
     @vote = Vote.new(params[:vote])
+    @vote.user_id = session[:user_id]
 
     respond_to do |format|
       if @vote.save
@@ -73,6 +85,7 @@ class VotesController < ApplicationController
   # DELETE /votes/1.json
   def destroy
     @vote = Vote.find(params[:id])
+
     @vote.destroy
 
     respond_to do |format|
@@ -81,3 +94,11 @@ class VotesController < ApplicationController
     end
   end
 end
+
+
+
+
+
+
+
+

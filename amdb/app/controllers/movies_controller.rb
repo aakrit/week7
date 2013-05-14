@@ -1,4 +1,11 @@
 class MoviesController < ApplicationController
+
+  before_filter :find_movie, except: [:new, :create, :index]
+
+  def find_movie
+    @movie = Movie.find(params[:id])
+  end
+
   # GET /movies
   # GET /movies.json
   def index
@@ -13,8 +20,6 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    @movie = Movie.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @movie }
@@ -34,7 +39,6 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
-    @movie = Movie.find(params[:id])
   end
 
   # POST /movies
@@ -56,8 +60,6 @@ class MoviesController < ApplicationController
   # PUT /movies/1
   # PUT /movies/1.json
   def update
-    @movie = Movie.find(params[:id])
-
     respond_to do |format|
       if @movie.update_attributes(params[:movie])
         format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
@@ -72,7 +74,6 @@ class MoviesController < ApplicationController
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
-    @movie = Movie.find(params[:id])
     @movie.destroy
 
     respond_to do |format|
